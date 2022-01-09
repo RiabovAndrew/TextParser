@@ -6,6 +6,10 @@ void WTxtExtractor::OpenFile(const std::string& path)
 	{
 		m_wfin->open(path, std::ios::binary);
 	}
+	else
+	{
+		throw std::runtime_error("Stream was already opened!");
+	}
 }
 
 void WTxtExtractor::OpenFile(const std::wstring& path)
@@ -14,12 +18,14 @@ void WTxtExtractor::OpenFile(const std::wstring& path)
 	{
 		m_wfin->open(path, std::ios::binary);
 	}
+	else
+	{
+		throw std::runtime_error("Stream was already opened!");
+	}
 }
 
-void WTxtExtractor::ExtractFull(std::unique_ptr<std::wstring>& pStr)
+void WTxtExtractor::ExtractFull(std::wstring& str)
 {
-	std::wstring str;
-
 	if (m_wfin->is_open())
 	{
 		m_wfin->seekg(0, std::ios::end);
@@ -32,6 +38,4 @@ void WTxtExtractor::ExtractFull(std::unique_ptr<std::wstring>& pStr)
 	{
 		throw std::runtime_error("Stream was not opened!");
 	}
-
-	pStr->assign(str);
 }

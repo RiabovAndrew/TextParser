@@ -13,15 +13,13 @@ int main()
 	SetConsoleCP(1251);
 	//--------------- main.cpp initialization ---------------//
 
-	auto str = new std::wstring();
-	std::unique_ptr<std::wstring> sPtr(str);
-
+	std::wstring str;
 
 	WTxtExtractor extractor;
 	extractor.OpenFile(L"P:\\C++\\TextParser\\1.txt");
-	extractor.ExtractFull(sPtr);
+	extractor.ExtractFull(str);
 
-	WStrDataContainer dataContainer(*sPtr);
+	WStrDataContainer dataContainer(str);
 
 	std::wcout << *dataContainer.m_wstr << std::endl;
 

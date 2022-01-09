@@ -25,7 +25,7 @@ public:
 
 	void OpenFile(const std::string& path) override;
 	void OpenFile(const std::wstring& path) override;
-	void ExtractFull(std::unique_ptr<std::wstring>& pStr) override;
+	void ExtractFull(std::wstring& str) override;
 
 private:
 	std::unique_ptr<std::wifstream> m_wfin;
