@@ -1,14 +1,14 @@
 #pragma once
 #include "Extractor.h"
-#include "WIfstreamGuard.h"
+#include <string>
+#include <fstream>
 
 class WTxtExtractor : public Extractor
 {
 public:
 	WTxtExtractor() 
 	{
-		auto wfinGuard = new stream_gurd::WIfstreamGuard();
-		m_wfin.reset(static_cast<std::wifstream*>(*wfinGuard));
+		m_wfin.reset(new std::wifstream());
 	}
 
 	explicit WTxtExtractor(const std::string& path) : WTxtExtractor()

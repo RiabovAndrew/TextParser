@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string>
-#include <fstream>
 #include <windows.h>
 
 #include "WTxtExtractor.h"

@@ -147,11 +147,6 @@
     <ClCompile Include="WTxtExtractor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StringUtilsLib\StringUtilsLib.vcxproj">
-      <Project>{427614b7-ee5f-40eb-8c9b-8556adb9895a}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="WStrDataContainer.h" />
     <ClInclude Include="Extractor.h" />
     <ClInclude Include="WTxtExtractor.h" />
