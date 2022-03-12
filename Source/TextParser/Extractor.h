@@ -1,4 +1,7 @@
 #pragma once
+
+#include "StrDataContainer.h"
+
 #include <string>
 #include <memory>
 
@@ -7,7 +10,8 @@ class Extractor
 {
 public:
 	virtual ~Extractor() = default;
-	virtual void OpenFile(const StrType&) = 0;
-	virtual void ExtractFull(StrType&) = 0;
+	virtual bool OpenStream(const StrType&) = 0;
+	virtual void CloseStream() = 0;
+	virtual void ExtractFull(StrDataContainer<StrType>&) = 0;
 };
 

@@ -14,10 +14,10 @@ int main()
 	StrDataContainer<std::wstring> dataContainer;
 	CommonTxtExtractor<wchar_t, std::wstring> extractor;
 
-	extractor.OpenFile(L"D:\\github\\TextParser\\Source\\1.txt");
-	extractor.ExtractFull(dataContainer.m_wstr);
+	if(extractor.OpenStream(L"D:\\github\\TextParser\\Source\\1.txt"))
+		extractor.ExtractFull(dataContainer);
 
-	std::wcout << dataContainer.m_wstr << std::endl;
+	std::wcout << dataContainer.m_str << std::endl;
 
 	return 0;
 }

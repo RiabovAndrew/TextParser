@@ -11,9 +11,9 @@ struct StrDataContainer
 
 	explicit StrDataContainer(const StrType& str)
 	{
-		this->m_wstr = str;
+		this->m_str = str;
 	}
 
-	StrType m_wstr;
+	StrType m_str;
 	std::map<StrType, unsigned> m_map;
 };

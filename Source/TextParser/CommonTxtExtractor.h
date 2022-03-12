@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Extractor.h"
+
 #include <string>
 #include <fstream>
 
@@ -11,28 +13,42 @@ public:
 
 	explicit CommonTxtExtractor(const StrType& path)
 	{
-		OpenFile(path);
+		this->OpenStream(path);
 	}
 
-	~CommonTxtExtractor() {};
+	~CommonTxtExtractor() 
+	{
+		this->CloseStream();
+	}
 
-	void OpenFile(const StrType& path) override
+	bool OpenStream(const StrType& path) override
 	{
 		if (!this->m_fin.is_open())
 		{
 			this->m_fin.open(path);
+			return true;
+		}
+
+		return false;
+	}
+
+	void CloseStream() override
+	{
+		if (this->m_fin.is_open())
+		{
+			this->m_fin.close();
 		}
 	}
 
-	void ExtractFull(StrType& str) override
+	void ExtractFull(StrDataContainer<StrType>& container) override
 	{
 		if (this->m_fin.is_open())
 		{
 			this->m_fin.seekg(0, std::ios::end);
-			str.reserve(this->m_fin.tellg());
+			container.m_str.reserve(this->m_fin.tellg());
 			this->m_fin.seekg(0, std::ios::beg);
 
-			str.append(
+			container.m_str.append(
 				std::istreambuf_iterator<CharType>(this->m_fin),
 				std::istreambuf_iterator<CharType>()
 			);
