@@ -1,8 +1,8 @@
-#include <iostream>
+﻿#include <iostream>
 #include <windows.h>
 
-#include "WTxtExtractor.h"
-#include "WStrDataContainer.h"
+#include "CommonTxtExtractor.h"
+#include "StrDataContainer.h"
 
 int main()
 {
@@ -11,16 +11,13 @@ int main()
 	SetConsoleCP(1251);
 	//--------------- main.cpp initialization ---------------//
 
-	std::wstring str;
+	StrDataContainer<std::wstring> dataContainer;
+	CommonTxtExtractor<wchar_t, std::wstring> extractor;
 
-	WTxtExtractor extractor;
-	extractor.OpenFile(L"P:\\C++\\TextParser\\1.txt");
-	extractor.ExtractFull(str);
+	extractor.OpenFile(L"D:\\github\\TextParser\\Source\\1.txt");
+	extractor.ExtractFull(dataContainer.m_wstr);
 
-	WStrDataContainer dataContainer(str);
+	std::wcout << dataContainer.m_wstr << std::endl;
 
-	std::wcout << *dataContainer.m_wstr << std::endl;
-
-	system("pause");
 	return 0;
 }

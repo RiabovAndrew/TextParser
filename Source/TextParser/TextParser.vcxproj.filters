@@ -18,18 +18,15 @@
     <ClCompile Include="main.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="WTxtExtractor.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Extractor.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="WTxtExtractor.h">
+    <ClInclude Include="CommonTxtExtractor.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="WStrDataContainer.h">
+    <ClInclude Include="StrDataContainer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
