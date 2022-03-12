@@ -9,19 +9,14 @@ class CommonTxtExtractor : public Extractor<StrType>
 public:
 	CommonTxtExtractor() {}
 
-	explicit CommonTxtExtractor(const std::string& path)
-	{
-		OpenFile(path);
-	}
-
-	explicit CommonTxtExtractor(const std::wstring& path)
+	explicit CommonTxtExtractor(const StrType& path)
 	{
 		OpenFile(path);
 	}
 
 	~CommonTxtExtractor() {};
 
-	void OpenFile(const std::string& path)
+	void OpenFile(const StrType& path) override
 	{
 		if (!this->m_fin.is_open())
 		{
@@ -29,15 +24,7 @@ public:
 		}
 	}
 
-	void OpenFile(const std::wstring& path)
-	{
-		if (!this->m_fin.is_open())
-		{
-			this->m_fin.open(path);
-		}
-	}
-
-	void ExtractFull(StrType& str)
+	void ExtractFull(StrType& str) override
 	{
 		if (this->m_fin.is_open())
 		{

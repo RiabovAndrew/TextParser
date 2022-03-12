@@ -6,9 +6,8 @@ template<typename StrType = std::string>
 class Extractor
 {
 public:
-	virtual ~Extractor() {};
-	virtual void OpenFile(const std::string&) = 0;
-	virtual void OpenFile(const std::wstring&) = 0;
+	virtual ~Extractor() = default;
+	virtual void OpenFile(const StrType&) = 0;
 	virtual void ExtractFull(StrType&) = 0;
 };
 
