@@ -29,5 +29,8 @@
     <ClInclude Include="StrDataContainer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="CommonParser.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

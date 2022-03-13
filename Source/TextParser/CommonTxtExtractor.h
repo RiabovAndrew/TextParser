@@ -1,61 +1,64 @@
 #pragma once
 
-#include "Extractor.h"
-
 #include <string>
 #include <fstream>
 
-template<typename CharType, typename StrType>
-class CommonTxtExtractor : public Extractor<StrType>
+#include "Extractor.h"
+
+namespace cmn
 {
-public:
-	CommonTxtExtractor() {}
-
-	explicit CommonTxtExtractor(const StrType& path)
+	template<typename CharType, typename StrType>
+	class CommonTxtExtractor : public Extractor<StrType>
 	{
-		this->OpenStream(path);
-	}
+	public:
+		CommonTxtExtractor() {}
 
-	~CommonTxtExtractor() 
-	{
-		this->CloseStream();
-	}
-
-	bool OpenStream(const StrType& path) override
-	{
-		if (!this->m_fin.is_open())
+		explicit CommonTxtExtractor(const StrType& path)
 		{
-			this->m_fin.open(path);
-			return true;
+			this->OpenStream(path);
 		}
 
-		return false;
-	}
-
-	void CloseStream() override
-	{
-		if (this->m_fin.is_open())
+		~CommonTxtExtractor() 
 		{
-			this->m_fin.close();
+			this->CloseStream();
 		}
-	}
 
-	void ExtractFull(StrDataContainer<StrType>& container) override
-	{
-		if (this->m_fin.is_open())
+		bool OpenStream(const StrType& path) override
 		{
-			this->m_fin.seekg(0, std::ios::end);
-			container.m_str.reserve(this->m_fin.tellg());
-			this->m_fin.seekg(0, std::ios::beg);
+			if (!this->m_fin.is_open())
+			{
+				this->m_fin.open(path);
+				return true;
+			}
 
-			container.m_str.append(
-				std::istreambuf_iterator<CharType>(this->m_fin),
-				std::istreambuf_iterator<CharType>()
-			);
+			return false;
 		}
-	}
 
-private:
-	std::basic_ifstream<CharType, std::char_traits<CharType>> m_fin;
-};
+		void CloseStream() override
+		{
+			if (this->m_fin.is_open())
+			{
+				this->m_fin.close();
+			}
+		}
+
+		void ExtractFull(StrDataContainer<StrType>& container) override
+		{
+			if (this->m_fin.is_open())
+			{
+				this->m_fin.seekg(0, std::ios::end);
+				container.m_str.reserve(this->m_fin.tellg());
+				this->m_fin.seekg(0, std::ios::beg);
+
+				container.m_str.append(
+					std::istreambuf_iterator<CharType>(this->m_fin),
+					std::istreambuf_iterator<CharType>()
+				);
+			}
+		}
+
+	private:
+		std::basic_ifstream<CharType> m_fin;
+	};
+}
 

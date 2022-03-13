@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonParser.h" />
     <ClInclude Include="StrDataContainer.h" />
     <ClInclude Include="Extractor.h" />
     <ClInclude Include="CommonTxtExtractor.h" />

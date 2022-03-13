@@ -1,9 +1,9 @@
 #pragma once
 
-#include "StrDataContainer.h"
-
 #include <string>
 #include <memory>
+
+#include "StrDataContainer.h"
 
 template<typename StrType = std::string>
 class Extractor

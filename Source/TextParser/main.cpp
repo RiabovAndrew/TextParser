@@ -3,6 +3,9 @@
 
 #include "CommonTxtExtractor.h"
 #include "StrDataContainer.h"
+#include "CommonParser.h"
+
+using CommonParser = cmn::CommonParser<wchar_t, std::wstring>;
 
 int main()
 {
@@ -12,12 +15,17 @@ int main()
 	//--------------- main.cpp initialization ---------------//
 
 	StrDataContainer<std::wstring> dataContainer;
-	CommonTxtExtractor<wchar_t, std::wstring> extractor;
+	cmn::CommonTxtExtractor<wchar_t, std::wstring> extractor;
 
 	if(extractor.OpenStream(L"D:\\github\\TextParser\\Source\\1.txt"))
 		extractor.ExtractFull(dataContainer);
 
-	std::wcout << dataContainer.m_str << std::endl;
+	CommonParser::ParseWords(dataContainer);
+
+	for (const auto &elem: dataContainer.m_map)
+	{
+		std::wcout << elem.first << ": " << elem.second << std::endl;
+	}
 
 	return 0;
 }
