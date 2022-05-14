@@ -9,9 +9,22 @@ struct StrDataContainer
 {
 	StrDataContainer() {}
 
-	explicit StrDataContainer(const StrType& str)
+	explicit StrDataContainer(const StrType& str) : m_str(str) {}
+
+	StrDataContainer(const StrDataContainer& other)
 	{
-		this->m_str = str;
+		this->m_str = other.m_str;
+		this->m_map = other.m_map;
+	}
+
+	StrDataContainer& operator=(const StrDataContainer& other)
+	{
+		StrDataContainer res;
+
+		res.m_str = other.m_str;
+		res.m_map = other.m_map;
+
+		return res;
 	}
 
 	StrType m_str;
