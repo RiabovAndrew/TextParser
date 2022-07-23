@@ -17,5 +17,8 @@
     <ClInclude Include="..\TextParser\CommonUsings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IPluginInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="..\TextParser\CommonUsings.h" />
     <ClInclude Include="..\TextParser\IPluginInterface.h" />
+    <ClInclude Include="IPluginInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
