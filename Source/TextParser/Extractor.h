@@ -3,15 +3,13 @@
 #include <string>
 #include <memory>
 
-#include "StrDataContainer.h"
-
 template<typename StrType = std::string>
-class Extractor
+class IExtractor
 {
 public:
-	virtual ~Extractor() = default;
+	virtual ~IExtractor() = default;
 	virtual bool OpenStream(const StrType&) = 0;
 	virtual void CloseStream() = 0;
-	virtual void ExtractFull(StrDataContainer<StrType>&) = 0;
+	virtual void Extract(StrType&) = 0;
 };
 

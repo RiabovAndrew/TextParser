@@ -1,11 +1,12 @@
 ﻿#include <iostream>
 #include <windows.h>
 
+#include "CommonUsings.h"
 #include "CommonTxtExtractor.h"
-#include "StrDataContainer.h"
 #include "CommonParser.h"
+#include <map>
 
-using CommonParser = cmn::CommonParser<wchar_t, std::wstring>;
+
 
 int main()
 {
@@ -14,15 +15,16 @@ int main()
 	SetConsoleCP(1251);
 	//--------------- main.cpp initialization ---------------//
 
-	StrDataContainer<std::wstring> dataContainer;
-	cmn::CommonTxtExtractor<wchar_t, std::wstring> extractor;
+	MapContainerType map;
+	cmn::CommonTxtExtractor<StrType> extractor;
+	StrType str;
 
-	if(extractor.OpenStream(L"D:\\github\\TextParser\\Source\\1.txt"))
-		extractor.ExtractFull(dataContainer);
+	if(extractor.OpenStream(L"S:\\Programming\\github\\TextParser\\Source\\1.txt"))
+		extractor.Extract(str);
 
-	CommonParser::ParseWords(dataContainer);
+	cmn::CommonParser<StrType>::ParseWords(str, map);
 
-	for (const auto &elem: dataContainer.m_map)
+	for (const auto& elem: map)
 	{
 		std::wcout << elem.first << ": " << elem.second << std::endl;
 	}

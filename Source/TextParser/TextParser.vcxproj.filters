@@ -26,10 +26,10 @@
     <ClInclude Include="CommonTxtExtractor.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="StrDataContainer.h">
+    <ClInclude Include="CommonParser.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="CommonParser.h">
+    <ClInclude Include="CommonUsings.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

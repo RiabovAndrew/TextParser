@@ -7,9 +7,11 @@
 
 namespace cmn
 {
-	template<typename CharType, typename StrType>
-	class CommonTxtExtractor : public Extractor<StrType>
+	template<typename StrType = std::string>
+	class CommonTxtExtractor : public IExtractor<StrType>
 	{
+		using CharType = typename StrType::value_type;
+
 	public:
 		CommonTxtExtractor() {}
 
@@ -28,7 +30,7 @@ namespace cmn
 			if (!this->m_fin.is_open())
 			{
 				this->m_fin.open(path);
-				return true;
+				return this->m_fin.is_open();
 			}
 
 			return false;
@@ -42,15 +44,17 @@ namespace cmn
 			}
 		}
 
-		void ExtractFull(StrDataContainer<StrType>& container) override
+		void Extract(StrType& str) override
 		{
+			str.clear();
+
 			if (this->m_fin.is_open())
 			{
 				this->m_fin.seekg(0, std::ios::end);
-				container.m_str.reserve(this->m_fin.tellg());
+				str.reserve(this->m_fin.tellg());
 				this->m_fin.seekg(0, std::ios::beg);
 
-				container.m_str.append(
+				str.append(
 					std::istreambuf_iterator<CharType>(this->m_fin),
 					std::istreambuf_iterator<CharType>()
 				);

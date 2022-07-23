@@ -2,28 +2,29 @@
 
 #include <string>
 #include <sstream>
-
-#include "StrDataContainer.h"
+#include <map>
 
 namespace cmn
 {
-	template<typename CharType, typename StrType>
+	template<typename StrType = std::string>
 	class CommonParser
 	{
+		using CharType = typename StrType::value_type;
+
 	public:
 
-		static void ParseWords(StrDataContainer<StrType>& container)
+		static void ParseWords(const StrType& str, std::map<StrType, unsigned long long>& map)
 		{
-			std::basic_istringstream<CharType> stream(container.m_str);
+			std::basic_istringstream<CharType> stream(str);
 
 			auto first = std::istream_iterator<StrType, CharType>(stream);
 			auto last = std::istream_iterator<StrType, CharType>();
 			for (; first != last; ++first)
 			{
-				auto word = container.m_map.find(*first);
-				if (word == container.m_map.end())
+				auto word = map.find(*first);
+				if (word == map.end())
 				{
-					container.m_map.emplace(*first, 1u);
+					map.emplace(*first, 1u);
 				}
 				else
 				{

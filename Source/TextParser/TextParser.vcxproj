@@ -147,7 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonParser.h" />
-    <ClInclude Include="StrDataContainer.h" />
+    <ClInclude Include="CommonUsings.h" />
     <ClInclude Include="Extractor.h" />
     <ClInclude Include="CommonTxtExtractor.h" />
   </ItemGroup>
