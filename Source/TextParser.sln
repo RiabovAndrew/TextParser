@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextParser", "TextParser\TextParser.vcxproj", "{C8B8AEEC-5DD7-42E4-90FF-2843D7A4E7FD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginManager", "PluginManager\PluginManager.vcxproj", "{9BA2375E-676A-4E42-9CFD-06E593404155}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{C8B8AEEC-5DD7-42E4-90FF-2843D7A4E7FD}.Release|x64.Build.0 = Release|x64
 		{C8B8AEEC-5DD7-42E4-90FF-2843D7A4E7FD}.Release|x86.ActiveCfg = Release|Win32
 		{C8B8AEEC-5DD7-42E4-90FF-2843D7A4E7FD}.Release|x86.Build.0 = Release|Win32
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Debug|x64.ActiveCfg = Debug|x64
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Debug|x64.Build.0 = Debug|x64
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Debug|x86.ActiveCfg = Debug|Win32
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Debug|x86.Build.0 = Debug|Win32
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Release|x64.ActiveCfg = Release|x64
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Release|x64.Build.0 = Release|x64
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Release|x86.ActiveCfg = Release|Win32
+		{9BA2375E-676A-4E42-9CFD-06E593404155}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

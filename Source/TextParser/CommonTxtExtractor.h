@@ -7,7 +7,7 @@
 
 namespace cmn
 {
-	template<typename StrType = std::string>
+	template<typename StrType>
 	class CommonTxtExtractor : public IExtractor<StrType>
 	{
 		using CharType = typename StrType::value_type;

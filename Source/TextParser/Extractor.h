@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 
-template<typename StrType = std::string>
+template<typename StrType>
 class IExtractor
 {
 public:
