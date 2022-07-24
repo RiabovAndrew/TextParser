@@ -20,6 +20,9 @@
     <ClInclude Include="CommonUsings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CommonTxtExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

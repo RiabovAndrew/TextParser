@@ -2,13 +2,11 @@
 #include <windows.h> 
 #include <stdio.h> 
 
-#include "CommonUsings.h"
-#include "CommonTxtExtractor.h"
+#include "CommonUsingsAndDefines.h"
 #include "CommonParser.h"
 #include <map>
 
-//typedef int(__cdecl* MYPROC)(LPCWSTR);
-using MYPROC = int(__cdecl*)(LPCWSTR);
+using MYPROC = int(__cdecl*)();
 
 int f()
 {
@@ -30,7 +28,7 @@ int f()
         if (NULL != ProcAdd)
         {
             fRunTimeLinkSuccess = TRUE;
-            (ProcAdd)(L"Message sent to the DLL function\n");
+            (ProcAdd)();
         }
 
         // Free the DLL module.
@@ -54,19 +52,19 @@ int main()
 
     f();
 
-	MapContainerW map;
-	cmn::CommonTxtExtractor<std::wstring> extractor;
-    std::wstring str;
+	//MapContainerW map;
+	//cmn::CommonTxtExtractor<std::wstring> extractor;
+    //std::wstring str;
 
-	if(extractor.OpenStream(L"S:\\Programming\\github\\TextParser\\Source\\1.txt"))
-		extractor.Extract(str);
+	//if(extractor.OpenStream(L"S:\\Programming\\github\\TextParser\\Source\\1.txt"))
+	//	extractor.Extract(str);
 
-	cmn::CommonParser<std::wstring>::ParseWords(str, map);
+	//cmn::CommonParser<std::wstring>::ParseWords(str, map);
 
-	for (const auto& elem: map)
-	{
-		std::wcout << elem.first << ": " << elem.second << std::endl;
-	}
+	//for (const auto& elem: map)
+	//{
+	//	std::wcout << elem.first << ": " << elem.second << std::endl;
+	//}
 
 	return 0;
 }

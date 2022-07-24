@@ -4,6 +4,8 @@
 #include <windows.h>
 #include "CommonUsings.h"
 
+#include "CommonTxtExtractor.h"
+
 #define EOF (-1)
 
 #ifdef __cplusplus    // If used by C++ code, 
@@ -12,6 +14,7 @@ extern "C" {          // we need to export the C interface
 
     __declspec(dllexport) PluginErrorType __cdecl Func()
     {
+        cmn::CommonTxtExtractor<std::wstring> extractor;
 
         return PluginErrorType::SuccessOperation;
     }
