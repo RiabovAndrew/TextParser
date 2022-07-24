@@ -1,10 +1,11 @@
 ﻿#include <iostream>
 #include <windows.h> 
 #include <stdio.h> 
+#include <map>
 
 #include "CommonUsingsAndDefines.h"
 #include "CommonParser.h"
-#include <map>
+#include "Plugin.h"
 
 using MYPROC = int(__cdecl*)();
 
@@ -51,6 +52,8 @@ int main()
 
 
     f();
+
+    auto pl = Plugin<std::wstring>(std::wstring(), nullptr, nullptr);
 
 	//MapContainerW map;
 	//cmn::CommonTxtExtractor<std::wstring> extractor;

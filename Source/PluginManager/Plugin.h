@@ -16,8 +16,15 @@ public:
 
 	~Plugin() = default;
 
-	pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<StrType> str) override;
-	pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT size_t bytes) override;
+	pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<StrType> str) override
+	{
+		return pm::PluginErrorType::UnsuccessfulOperation;
+	}
+
+	pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT size_t bytes) override
+	{
+		return pm::PluginErrorType::UnsuccessfulOperation;
+	}
 
 private:
 	std::wstring m_path;

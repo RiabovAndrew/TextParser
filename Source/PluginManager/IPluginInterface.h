@@ -14,6 +14,13 @@ class IPluginInterface
 {
 public:
 	virtual ~IPluginInterface() {}
-	virtual pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<StrType> str);
-	virtual pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT size_t bytes);
+	virtual pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<StrType> str)
+	{
+		return pm::PluginErrorType::UnsuccessfulOperation;
+	}
+
+	virtual pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT size_t bytes)
+	{
+		return pm::PluginErrorType::UnsuccessfulOperation;
+	}
 };

@@ -159,6 +159,7 @@
     <ClInclude Include="IPluginInterface.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Plugin.h" />
+    <ClInclude Include="PluginManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -167,7 +168,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Plugin.cpp" />
     <ClCompile Include="PluginManager.cpp" />
   </ItemGroup>
   <ItemGroup>
