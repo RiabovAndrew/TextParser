@@ -44,25 +44,35 @@ int main()
 	SetConsoleOutputCP(1251);
 	SetConsoleCP(1251);
 	//--------------- main.cpp initialization ---------------//
-
-	PluginManager pluginManager;
-	Load(pluginManager, L"TXTReadPlugin.dll");
-
-	auto plugin = pluginManager.GetPlugin(L"TXTReadPlugin.dll");
-	unsigned long long bytes = 0;
-	auto res = plugin->GetFileTextSize(L"S:\\Programming\\github\\TextParser\\Source\\1.txt", bytes);
-	DispatchException(res);
-	std::wcout << "File size: " << bytes << std::endl;
-
-	auto str = std::make_shared<std::wstring>();
-	res = plugin->ReadFileFull(L"S:\\Programming\\github\\TextParser\\Source\\1.txt", str);
-	DispatchException(res);
-
-	MapContainerW map;
-	cmn::CommonParser::ParseWords(*str.get(), map);
-	for (const auto& elem: map)
+	try
 	{
-		std::wcout << elem.first << ": " << elem.second << std::endl;
+		PluginManager pluginManager;
+		Load(pluginManager, L"TXTReadPlugin.dll");
+
+		auto plugin = pluginManager.GetPlugin(L"TXTReadPlugin.dll");
+		unsigned long long bytes = 0;
+		auto res = plugin->GetFileTextSize(L"1.txt", bytes);
+		DispatchException(res);
+		std::wcout << "File size: " << bytes << std::endl;
+
+		auto str = std::make_shared<std::wstring>();
+		res = plugin->ReadFileFull(L"1.txt", str);
+		DispatchException(res);
+
+		MapContainerW map;
+		cmn::CommonParser::ParseWords(*str.get(), map);
+		for (const auto& elem : map)
+		{
+			std::wcout << elem.first << ": " << elem.second << std::endl;
+		}
+	}
+	catch (const std::runtime_error& e)
+	{
+		std::wcout << "Exception: " << e.what() << std::endl;
+	}
+	catch (...)
+	{
+		std::wcout << "Exception: " << "unrecognized exception" << std::endl;
 	}
 
 	return 0;
