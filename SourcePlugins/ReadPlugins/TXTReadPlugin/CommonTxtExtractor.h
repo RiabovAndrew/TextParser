@@ -47,17 +47,28 @@ namespace cmn
 		{
 			str.clear();
 
-			if (this->m_fin.is_open())
+			if (!this->m_fin.is_open())
 			{
-				this->m_fin.seekg(0, std::ios::end);
-				str.reserve(this->m_fin.tellg());
-				this->m_fin.seekg(0, std::ios::beg);
-
-				str.append(
-					std::istreambuf_iterator<CharType>(this->m_fin),
-					std::istreambuf_iterator<CharType>()
-				);
+				throw std::runtime_error("Cannot extract data from file");
 			}
+
+			this->m_fin.seekg(0, std::ios::end);
+			str.reserve(this->m_fin.tellg());
+			this->m_fin.seekg(0, std::ios::beg);
+
+			str.append(
+				std::istreambuf_iterator<CharType>(this->m_fin),
+				std::istreambuf_iterator<CharType>()
+			);
+		}
+
+		unsigned long long GetFileSize()
+		{
+			if (!this->m_fin.is_open())
+				throw std::runtime_error("Cannot get file size");
+
+			this->m_fin.seekg(0, std::ios::end);
+			return this->m_fin.tellg();
 		}
 
 	private:

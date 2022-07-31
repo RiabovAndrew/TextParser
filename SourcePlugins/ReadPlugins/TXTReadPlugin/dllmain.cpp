@@ -18,8 +18,10 @@ extern "C" {          // we need to export the C interface
         {
             cmn::CommonTxtExtractor extractor;
 
-            if(extractor.OpenStream(L"S:\\Programming\\github\\TextParser\\Source\\1.txt"))
+            if(extractor.OpenStream(fullPath))
             	extractor.Extract(*str.get());
+            else
+                return PluginErrorType::UnsuccessfulOperation;
         }
         catch (...)
         {
@@ -33,7 +35,12 @@ extern "C" {          // we need to export the C interface
     {
         try
         {
-            bytes = 123456789;
+            cmn::CommonTxtExtractor extractor;
+
+            if (extractor.OpenStream(fullPath))
+                bytes = extractor.GetFileSize();
+            else
+                return PluginErrorType::UnsuccessfulOperation;
         }
         catch (...)
         {

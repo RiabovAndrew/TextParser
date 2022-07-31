@@ -52,6 +52,7 @@ int main()
 	unsigned long long bytes = 0;
 	auto res = plugin->GetFileTextSize(L"S:\\Programming\\github\\TextParser\\Source\\1.txt", bytes);
 	DispatchException(res);
+	std::wcout << "File size: " << bytes << std::endl;
 
 	auto str = std::make_shared<std::wstring>();
 	res = plugin->ReadFileFull(L"S:\\Programming\\github\\TextParser\\Source\\1.txt", str);
