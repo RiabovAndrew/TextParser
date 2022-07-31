@@ -6,41 +6,36 @@
 #include "CommonUsingsAndDefines.h"
 #include "CommonParser.h"
 #include "Plugin.h"
+#include "PluginManager.h"
 
-using MYPROC = int(__cdecl*)();
-
-int f()
+void Load(PluginManager& pluginManager, const std::wstring& name)
 {
-    HINSTANCE hinstLib;
-    MYPROC ProcAdd;
-    BOOL fFreeResult, fRunTimeLinkSuccess = FALSE;
+	// Get a handle to the DLL module
+	HINSTANCE hinstLib = LoadLibraryW(name.c_str());
+	auto guard(std::make_unique<HInstanceGuard>(hinstLib));
 
-    // Get a handle to the DLL module.
+	// If the handle is valid, try to get the function address
+	if (hinstLib == nullptr)
+		throw std::runtime_error("Handle is not valid");
 
-    hinstLib = LoadLibrary(TEXT("TXTExtractorPlugin.dll"));
+	auto readFileFullFunc = reinterpret_cast<ReadFileFullFunc>(GetProcAddress(guard->get(), "ReadFileFull"));
+	if (readFileFullFunc == nullptr)
+		throw std::runtime_error("ReadFileFullFunc was not loaded");
 
-    // If the handle is valid, try to get the function address.
+	auto getFileTextSizeFunc = reinterpret_cast<GetFileTextSizeFunc>(GetProcAddress(guard->get(), "GetFileTextSize"));
+	if (readFileFullFunc == nullptr)
+		throw std::runtime_error("GetFileTextSizeFunc was not loaded");
 
-    if (hinstLib != NULL)
-    {
-        ProcAdd = (MYPROC)GetProcAddress(hinstLib, "myPuts");
+	auto plugin = std::make_unique<Plugin>(readFileFullFunc, getFileTextSizeFunc);
+	pluginManager.AddPlugin(std::move(plugin), name, std::move(guard));
+}
 
-        // If the function address is valid, call the function.
-        if (NULL != ProcAdd)
-        {
-            fRunTimeLinkSuccess = TRUE;
-            (ProcAdd)();
-        }
-
-        // Free the DLL module.
-        fFreeResult = FreeLibrary(hinstLib);
-    }
-
-    // If unable to call the DLL function, use an alternative.
-    if (!fRunTimeLinkSuccess)
-        printf("Message printed from executable\n");
-
-    return 0;
+void DispatchException(pm::PluginErrorType error)
+{
+	if (error == pm::PluginErrorType::UnsuccessfulOperation)
+	{
+		throw std::runtime_error("pm::PluginErrorType::UnsuccessfulOperation");
+	}
 }
 
 int main()
@@ -50,24 +45,24 @@ int main()
 	SetConsoleCP(1251);
 	//--------------- main.cpp initialization ---------------//
 
+	PluginManager pluginManager;
+	Load(pluginManager, L"TXTReadPlugin.dll");
 
-    f();
+	auto plugin = pluginManager.GetPlugin(L"TXTReadPlugin.dll");
+	unsigned long long bytes = 0;
+	auto res = plugin->GetFileTextSize(L"S:\\Programming\\github\\TextParser\\Source\\1.txt", bytes);
+	DispatchException(res);
 
-    auto pl = Plugin<std::wstring>(std::wstring(), nullptr, nullptr);
+	auto str = std::make_shared<std::wstring>();
+	res = plugin->ReadFileFull(L"S:\\Programming\\github\\TextParser\\Source\\1.txt", str);
+	DispatchException(res);
 
-	//MapContainerW map;
-	//cmn::CommonTxtExtractor<std::wstring> extractor;
-    //std::wstring str;
-
-	//if(extractor.OpenStream(L"S:\\Programming\\github\\TextParser\\Source\\1.txt"))
-	//	extractor.Extract(str);
-
-	//cmn::CommonParser<std::wstring>::ParseWords(str, map);
-
-	//for (const auto& elem: map)
-	//{
-	//	std::wcout << elem.first << ": " << elem.second << std::endl;
-	//}
+	MapContainerW map;
+	cmn::CommonParser::ParseWords(*str.get(), map);
+	for (const auto& elem: map)
+	{
+		std::wcout << elem.first << ": " << elem.second << std::endl;
+	}
 
 	return 0;
 }

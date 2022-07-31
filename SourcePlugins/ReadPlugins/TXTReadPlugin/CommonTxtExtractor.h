@@ -7,15 +7,14 @@
 
 namespace cmn
 {
-	template<typename StrType>
-	class CommonTxtExtractor : public IExtractor<StrType>
+	class CommonTxtExtractor : public IExtractor
 	{
-		using CharType = typename StrType::value_type;
+		using CharType = typename std::wstring::value_type;
 
 	public:
 		CommonTxtExtractor() {}
 
-		explicit CommonTxtExtractor(const StrType& path)
+		explicit CommonTxtExtractor(const std::wstring& path)
 		{
 			this->OpenStream(path);
 		}
@@ -25,7 +24,7 @@ namespace cmn
 			this->CloseStream();
 		}
 
-		bool OpenStream(const StrType& path) override
+		bool OpenStream(const std::wstring& path) override
 		{
 			if (!this->m_fin.is_open())
 			{
@@ -44,7 +43,7 @@ namespace cmn
 			}
 		}
 
-		void Extract(StrType& str) override
+		void Extract(std::wstring& str) override
 		{
 			str.clear();
 

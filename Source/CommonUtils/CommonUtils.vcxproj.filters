@@ -24,6 +24,9 @@
     <ClInclude Include="CommonUsingsAndDefines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HInstanceGuard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommonUtils.cpp">

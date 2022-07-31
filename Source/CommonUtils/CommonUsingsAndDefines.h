@@ -3,7 +3,6 @@
 #include <string>
 #include <map>
 
-using MapContainer = std::map<std::string, unsigned long long>;
 using MapContainerW = std::map<std::wstring, unsigned long long>;
 
 #define OUT

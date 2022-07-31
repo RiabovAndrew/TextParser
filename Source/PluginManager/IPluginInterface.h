@@ -1,25 +1,21 @@
 #pragma once
 
-#include "CommonUsingsAndDefines.h"
 #include <iostream>
+#include "CommonUsingsAndDefines.h"
 
-template<typename StrType>
-using ReadFileFullFunc = pm::PluginError(__cdecl*)(IN std::wstring fullPath, OUT std::shared_ptr<StrType> str);
-template<typename StrType>
-using GetFileTextSizeFunc = pm::PluginError(__cdecl*)(IN std::wstring fullPath, OUT size_t bytes);
+using ReadFileFullFunc = pm::PluginError(__cdecl*)(IN std::wstring fullPath, OUT std::shared_ptr<std::wstring> str);
+using GetFileTextSizeFunc = pm::PluginError(__cdecl*)(IN std::wstring fullPath, OUT unsigned long long& bytes);
 
-
-template<typename StrType>
 class IPluginInterface
 {
 public:
 	virtual ~IPluginInterface() {}
-	virtual pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<StrType> str)
+	virtual pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<std::wstring> str)
 	{
 		return pm::PluginErrorType::UnsuccessfulOperation;
 	}
 
-	virtual pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT size_t bytes)
+	virtual pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT unsigned long long& bytes)
 	{
 		return pm::PluginErrorType::UnsuccessfulOperation;
 	}

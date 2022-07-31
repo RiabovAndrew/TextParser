@@ -1,34 +1,57 @@
 #pragma once
 
+#include <windows.h> 
+#include <stdio.h>
+
 #include "IPluginInterface.h"
 
-template<typename StrType>
-class Plugin : public IPluginInterface<StrType>
+class Plugin : public IPluginInterface
 {
 public:
-	Plugin() = default;
+	Plugin() = delete;
 
 	Plugin(
-		const std::wstring& path,
-		ReadFileFullFunc<StrType> readFileFunc,
-		GetFileTextSizeFunc<StrType> getFileTextSizeFunc) :
-		m_path(path), m_readFileFunc(readFileFunc), m_getFileTextFunc(getFileTextSizeFunc) {}
+		ReadFileFullFunc readFileFunc,
+		GetFileTextSizeFunc getFileTextSizeFunc) :
+		m_readFileFunc(readFileFunc), 
+		m_getFileTextFunc(getFileTextSizeFunc) {}
 
-	~Plugin() = default;
+	virtual ~Plugin() = default;
 
-	pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<StrType> str) override
+	pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<std::wstring> str) override
 	{
-		return pm::PluginErrorType::UnsuccessfulOperation;
+		pm::PluginErrorType res = pm::PluginErrorType::UnsuccessfulOperation;
+
+		try
+		{
+			res = static_cast<pm::PluginErrorType>((m_readFileFunc)(fullPath, str));
+		}
+		catch (...)
+		{
+			return pm::PluginErrorType::UnsuccessfulOperation;
+		}
+
+		return res;
 	}
 
-	pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT size_t bytes) override
+	pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT unsigned long long& bytes) override
 	{
-		return pm::PluginErrorType::UnsuccessfulOperation;
+		pm::PluginErrorType res = pm::PluginErrorType::UnsuccessfulOperation;
+
+		try
+		{
+			res = static_cast<pm::PluginErrorType>((m_getFileTextFunc)(fullPath, bytes));
+		}
+		catch (...)
+		{
+			return pm::PluginErrorType::UnsuccessfulOperation;
+		}
+
+		return res;
 	}
 
 private:
-	std::wstring m_path;
-	ReadFileFullFunc<StrType> m_readFileFunc;
-	GetFileTextSizeFunc<StrType> m_getFileTextFunc;
+	ReadFileFullFunc m_readFileFunc;
+	GetFileTextSizeFunc m_getFileTextFunc;
 };
 
