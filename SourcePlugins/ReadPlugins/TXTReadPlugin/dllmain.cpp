@@ -12,7 +12,7 @@
 extern "C" {          // we need to export the C interface
 #endif
 
-    __declspec(dllexport) PluginErrorType __cdecl ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<std::wstring> str)
+    __declspec(dllexport) PluginErrorType __cdecl ReadFileFull(IN const std::wstring& fullPath, OUT std::shared_ptr<std::wstring> str)
     {
         try
         {
@@ -31,7 +31,7 @@ extern "C" {          // we need to export the C interface
         return PluginErrorType::SuccessOperation;
     }
 
-    __declspec(dllexport) PluginErrorType __cdecl GetFileTextSize(IN std::wstring fullPath, OUT unsigned long long& bytes)
+    __declspec(dllexport) PluginErrorType __cdecl GetFileTextSize(IN const std::wstring& fullPath, OUT unsigned long long& bytes)
     {
         try
         {

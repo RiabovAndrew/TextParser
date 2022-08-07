@@ -49,7 +49,7 @@ namespace cmn
 
 			if (!this->m_fin.is_open())
 			{
-				throw std::runtime_error("Cannot extract data from file");
+				throw std::runtime_error(__FUNCTION__ ": Cannot extract data from file. File is not opened");
 			}
 
 			this->m_fin.seekg(0, std::ios::end);
@@ -65,7 +65,7 @@ namespace cmn
 		unsigned long long GetFileSize()
 		{
 			if (!this->m_fin.is_open())
-				throw std::runtime_error("Cannot get file size");
+				throw std::runtime_error(__FUNCTION__ ": Cannot get file size. File is not opened");
 
 			this->m_fin.seekg(0, std::ios::end);
 			return this->m_fin.tellg();

@@ -16,15 +16,15 @@ void Load(PluginManager& pluginManager, const std::wstring& name)
 
 	// If the handle is valid, try to get the function address
 	if (hinstLib == nullptr)
-		throw std::runtime_error("Handle is not valid");
+		throw std::runtime_error(__FUNCTION__ ": Handle is not valid");
 
 	auto readFileFullFunc = reinterpret_cast<ReadFileFullFunc>(GetProcAddress(guard->get(), "ReadFileFull"));
 	if (readFileFullFunc == nullptr)
-		throw std::runtime_error("ReadFileFullFunc was not loaded");
+		throw std::runtime_error(__FUNCTION__ ": ReadFileFullFunc was not loaded");
 
 	auto getFileTextSizeFunc = reinterpret_cast<GetFileTextSizeFunc>(GetProcAddress(guard->get(), "GetFileTextSize"));
 	if (readFileFullFunc == nullptr)
-		throw std::runtime_error("GetFileTextSizeFunc was not loaded");
+		throw std::runtime_error(__FUNCTION__ ": GetFileTextSizeFunc was not loaded");
 
 	auto plugin = std::make_unique<Plugin>(readFileFullFunc, getFileTextSizeFunc);
 	pluginManager.AddPlugin(std::move(plugin), name, std::move(guard));
@@ -34,7 +34,7 @@ void DispatchException(pm::PluginErrorType error)
 {
 	if (error == pm::PluginErrorType::UnsuccessfulOperation)
 	{
-		throw std::runtime_error("pm::PluginErrorType::UnsuccessfulOperation");
+		throw std::runtime_error(__FUNCTION__ ": pm::PluginErrorType::UnsuccessfulOperation");
 	}
 }
 
@@ -68,11 +68,11 @@ int main()
 	}
 	catch (const std::runtime_error& e)
 	{
-		std::wcout << "Exception: " << e.what() << std::endl;
+		std::wcout << e.what() << std::endl;
 	}
 	catch (...)
 	{
-		std::wcout << "Exception: " << "unrecognized exception" << std::endl;
+		std::wcout << "Unrecognized exception" << std::endl;
 	}
 
 	return 0;
