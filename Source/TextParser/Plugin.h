@@ -18,7 +18,7 @@ public:
 
 	virtual ~Plugin() = default;
 
-	pm::PluginErrorType ReadFileFull(IN std::wstring fullPath, OUT std::shared_ptr<std::wstring> str) override
+	pm::PluginErrorType ReadFileFull(IN const std::wstring& fullPath, OUT std::shared_ptr<std::wstring> str) override
 	{
 		pm::PluginErrorType res = pm::PluginErrorType::UnsuccessfulOperation;
 
@@ -34,7 +34,7 @@ public:
 		return res;
 	}
 
-	pm::PluginErrorType GetFileTextSize(IN std::wstring fullPath, OUT unsigned long long& bytes) override
+	pm::PluginErrorType GetFileTextSize(IN const std::wstring& fullPath, OUT unsigned long long& bytes) override
 	{
 		pm::PluginErrorType res = pm::PluginErrorType::UnsuccessfulOperation;
 
