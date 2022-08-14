@@ -8,7 +8,7 @@ For now there are only two features:
 
 ## How to
 
-Run application in your command prompt using one these arguments:
+Run application in your command prompt using one of these arguments:
 
 `-h` or `--help`               shows help message and exits.<br>
 `-v` or `--version`            prints version information and exits.<br>
