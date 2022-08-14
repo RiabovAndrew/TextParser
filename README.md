@@ -2,9 +2,9 @@
  
 ## What can this parser do?
 
-For now there is only two features work:
-- Get size of text inside the file
-- Get count of every word in searching file
+For now there are only two features:
+1. Get size of text inside the file
+2. Get count of every word in searching file
 
 ## How to
 
@@ -14,4 +14,4 @@ Run application in your command prompt using one these arguments:
 `-v` or `--version`            prints version information and exits.<br>
 `-p` or `--FullFilePath`       specify the path to file you going to read from. [required]
 
-So, if you use -p argument, the program will show you parse results.
+So, if you use `-p` argument, the program will show you parse results for specified file.
