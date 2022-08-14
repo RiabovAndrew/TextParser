@@ -158,7 +158,7 @@
       <Version>0.1</Version>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y ".\..\x64\Debug\TXTReadPlugin.dll" ".\..\..\..\Source\x64\Debug\TXTReadPlugin.dll"</Command>
+      <Command>copy /Y "$(SolutionDir)$(Platform)\$(Configuration)\TXTReadPlugin.dll" ".\..\..\..\Source\$(Platform)\$(Configuration)\TXTReadPlugin.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -183,7 +183,7 @@
       <Version>0.1</Version>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y ".\..\x64\Debug\TXTReadPlugin.dll" ".\..\..\..\Source\x64\Debug\TXTReadPlugin.dll"</Command>
+      <Command>copy /Y "$(SolutionDir)$(Platform)\$(Configuration)\TXTReadPlugin.dll" ".\..\..\..\Source\$(Platform)\$(Configuration)\TXTReadPlugin.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
