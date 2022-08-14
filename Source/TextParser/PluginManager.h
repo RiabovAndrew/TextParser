@@ -26,7 +26,10 @@ public:
 
 	auto GetPlugin(const std::wstring& pluginName)
 	{
-		return this->m_pluginsMap.find(pluginName)->second.get();
+		auto pluginIt = this->m_pluginsMap.find(pluginName);
+		if (pluginIt == this->m_pluginsMap.end())
+			return static_cast<decltype(pluginIt->second.get())>(nullptr);
+		return pluginIt->second.get();
 	}
 
 private:

@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿#include "argparse/argparse.hpp"
+#include <iostream>
 #include <windows.h> 
 #include <stdio.h> 
 #include <map>
@@ -7,6 +8,7 @@
 #include "CommonParser.h"
 #include "Plugin.h"
 #include "PluginManager.h"
+#include "StringUtils.h"
 
 void Load(PluginManager& pluginManager, const std::wstring& name)
 {
@@ -38,32 +40,53 @@ void DispatchException(pm::PluginErrorType error)
 	}
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-	//--------------- main.cpp initialization ---------------//
 	SetConsoleOutputCP(1251);
 	SetConsoleCP(1251);
-	//--------------- main.cpp initialization ---------------//
+
+	argparse::ArgumentParser program("TextParser.exe");
+	program.add_argument("-p", "--FullFilePath")
+		.help("specify the path to file you going to read from.")
+		.required();
+
+	PluginManager pluginManager;
+
 	try
 	{
-		PluginManager pluginManager;
-		Load(pluginManager, L"TXTReadPlugin.dll");
+		program.parse_args(argc, argv);
+		auto path = program.get<std::string>("-p");
+		std::wstring wpath(path.cbegin(), path.cend());
 
-		auto plugin = pluginManager.GetPlugin(L"TXTReadPlugin.dll");
-		unsigned long long bytes = 0;
-		auto res = plugin->GetFileTextSize(L"1.txt", bytes);
-		DispatchException(res);
-		std::wcout << "File size: " << bytes << std::endl;
-
-		auto str = std::make_shared<std::wstring>();
-		res = plugin->ReadFileFull(L"1.txt", str);
-		DispatchException(res);
-
-		MapContainerW map;
-		cmn::CommonParser::ParseWords(*str.get(), map);
-		for (const auto& elem : map)
+		if (GetFileExtension(wpath) == L"txt")
 		{
-			std::wcout << elem.first << ": " << elem.second << std::endl;
+			// Let's load plugin.
+			auto plugin = pluginManager.GetPlugin(L"TXTReadPlugin.dll");
+			if (!plugin)
+				Load(pluginManager, L"TXTReadPlugin.dll");
+				plugin = pluginManager.GetPlugin(L"TXTReadPlugin.dll");
+
+			// Just do some stuff to show how parse works.
+			unsigned long long bytes = 0;
+			auto res = plugin->GetFileTextSize(wpath, bytes);
+			DispatchException(res);
+
+			std::wcout << "File size: " << bytes << std::endl << std::endl;
+
+			auto str = std::make_shared<std::wstring>();
+			res = plugin->ReadFileFull(wpath, str);
+			DispatchException(res);
+
+			MapContainerW map;
+			cmn::CommonParser::ParseWords(*str.get(), map);
+			for (const auto& elem : map)
+			{
+				std::wcout << elem.first << ": " << elem.second << std::endl;
+			}
+		}
+		else
+		{
+			std::wcout << "These is no appropriative plugin for this type of file" << std::endl;
 		}
 	}
 	catch (const std::runtime_error& e)
