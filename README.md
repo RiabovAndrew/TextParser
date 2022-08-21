@@ -15,3 +15,9 @@ Run application in your command prompt using one of these arguments:
 `-p` or `--FullFilePath`       specify the path to file you going to read from. [required]
 
 So, if you use `-p` argument, the program will show you parse results for specified file.
+
+## Deploy
+
+1. Download GTest sources by this link: https://github.com/google/googletest/releases/tag/release-1.12.1
+2. Extract in C:\Libs. So, include dir will be like: C:\Libs\googletest-release-1.12.1\googletest\include.
+Src will be: C:\Libs\googletest-release-1.12.1\googletest\src.
