@@ -19,5 +19,5 @@ So, if you use `-p` argument, the program will show you parse results for specif
 ## Deploy
 
 1. Download GTest sources by this link: https://github.com/google/googletest/releases/tag/release-1.12.1
-2. Extract in C:\Libs. So, include dir will be like: C:\Libs\googletest-release-1.12.1\googletest\include.
-Src will be: C:\Libs\googletest-release-1.12.1\googletest\src.
+2. Extract in `C:\Libs`. So, include dir will be like: `C:\Libs\googletest-release-1.12.1\googletest\include`.
+Src will be: `C:\Libs\googletest-release-1.12.1\googletest\src`.
